@@ -4,8 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AngularMaterialModule } from './shared/angular-material.module'; // https://gist.github.com/ArbitCode/78da9c31acc608d2039ce79c998239ba
+import {Routes, RouterModule} from '@angular/router';
 
+const routes: Routes = [
+    { path: 'contactmanager/', loadChildren: () => import('./contactmanager/contactmanager.module').then(m => m.ContactManagerModule) },
+    { path: 'demo', loadChildren: () => import('./demo/demo.module').then(m => m.DemoModule) },
+    { path: '**', redirectTo: 'contactmanager/' }];
 @NgModule({
   declarations: [
     AppComponent
@@ -14,7 +18,7 @@ import { AngularMaterialModule } from './shared/angular-material.module'; // htt
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AngularMaterialModule
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]
